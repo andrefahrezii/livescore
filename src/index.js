@@ -1,13 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "./routes";
+// import { Provider } from "react-redux";
+// import store from "./application/store-config/store";
+import reportWebVitals from "./reportWebVitals";
+import { ConfigProvider } from "antd";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+ConfigProvider.config({
+  theme: {
+    primaryColor: "#e55300"
+  }
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const router = createBrowserRouter(routes);
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <Provider store={store}> */}
+    <Suspense >
+      <RouterProvider router={router} />
+    </Suspense>
+    {/* </Provider>, */}
   </React.StrictMode>
 );
 
