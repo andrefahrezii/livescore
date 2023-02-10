@@ -1,7 +1,7 @@
 import React from "react";
 import {
     Row,
-    Table,
+
     Layout,
     Col,
     Button,
@@ -25,73 +25,73 @@ const { Header, Content, Footer } = Layout;
 
 const { Title } = Typography;
 // table example
-const columns = [
-    {
-        title: 'no',
-        dataIndex: 'key',
-        defaultSortOrder: 'descend',
-        sorter: (a, b) => a.age - b.age,
-    },
-    {
-        title: 'klub',
-        dataIndex: 'name'
-    },
-    {
-        title: 'Ma',
-        dataIndex: 'age',
-        defaultSortOrder: 'descend',
-        sorter: (a, b) => a.age - b.age,
-    },
-    {
-        title: 'Me',
-        dataIndex: 'Me'
-    },
-    {
-        title: 'S',
-        dataIndex: 'S'
-    },
-    {
-        title: 'K',
-        dataIndex: 'K'
-    },
-    {
-        title: 'GM',
-        dataIndex: 'GM'
-    },
-    {
-        title: 'GK',
-        dataIndex: 'GK'
-    },
-    {
-        title: 'Point',
-        dataIndex: 'Point'
-    },
-];
+// const columns = [
+//     {
+//         title: 'no',
+//         dataIndex: 'key',
+//         defaultSortOrder: 'descend',
+//         sorter: (a, b) => a.age - b.age,
+//     },
+//     {
+//         title: 'klub',
+//         dataIndex: 'name'
+//     },
+//     {
+//         title: 'Ma',
+//         dataIndex: 'age',
+//         defaultSortOrder: 'descend',
+//         sorter: (a, b) => a.age - b.age,
+//     },
+//     {
+//         title: 'Me',
+//         dataIndex: 'Me'
+//     },
+//     {
+//         title: 'S',
+//         dataIndex: 'S'
+//     },
+//     {
+//         title: 'K',
+//         dataIndex: 'K'
+//     },
+//     {
+//         title: 'GM',
+//         dataIndex: 'GM'
+//     },
+//     {
+//         title: 'GK',
+//         dataIndex: 'GK'
+//     },
+//     {
+//         title: 'Point',
+//         dataIndex: 'Point'
+//     },
+// ];
 
 
-const datas = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
+// const datas = [
+//     {
+//         key: '1',
+//         name: 'John Brown',
+//         age: 32,
+//         address: 'New York No. 1 Lake Park',
+//         tags: ['nice', 'developer'],
+//     },
+//     {
+//         key: '2',
+//         name: 'Jim Green',
+//         age: 42,
+//         address: 'London No. 1 Lake Park',
+//         tags: ['loser'],
+//     },
+//     {
+//         key: '3',
+//         name: 'Joe Black',
+//         age: 32,
+//         address: 'Sydney No. 1 Lake Park',
+//         tags: ['cool', 'teacher'],
+//     },
+// ];
 
 
 
@@ -173,12 +173,12 @@ const App = () => {
         })
             .then(function (response) {
                 console.log(response.data.status)
-                if (response.data.status = 200) {
+                if (response.data.status === 200) {
                     messageApi.open({
                         type: "succes",
                         content: "data berhasil di input",
                     })
-                } else if (response.data.status = 422) {
+                } else if (response.data.status === 422) {
                     messageApi.open({
                         type: "error",
                         content: "data gagal di input",
@@ -196,7 +196,7 @@ const App = () => {
             console.log("klub A menang dengan Score", scoreA, "mendapatkan point 3")
         } else if (scoreA < scoreB) {
             console.log("klub B menang dengan Score", scoreB, "kmendapatkan point 3")
-        } else if (scoreA == scoreB) {
+        } else if (scoreA === scoreB) {
             console.log("seri dengan score ", scoreA, "-", scoreB, "masing masing mendapatkan point 1")
         }
         console.log("input score", inputscore)
