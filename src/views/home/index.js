@@ -11,10 +11,11 @@ import {
     Input,
     // Select,
     message,
-    Divider
+    Divider,
+    Watermark
 } from 'antd';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 //get data
 
 
@@ -160,6 +161,10 @@ const App = () => {
     };
     // console.log(inputklub)
 
+    useEffect(() => {
+
+    });
+
     const sendklub = () => {
         axios({
             method: 'POST',
@@ -167,26 +172,24 @@ const App = () => {
             data: inputklub
         })
             .then(function (response) {
-
-                if (response.data.status == 200) {
+                console.log(response.data.status)
+                if (response.data.status = 200) {
                     messageApi.open({
                         type: "succes",
                         content: "data berhasil di input",
-                    });
-                } else if (response.data.status == 400) {
+                    })
+                } else if (response.data.status = 422) {
                     messageApi.open({
                         type: "error",
                         content: "data gagal di input",
                     });
                 }
-
             })
             .catch(function (error) {
                 console.log(error);
             });
-
-
     };
+
 
     const sendscore = () => {
         if (scoreA > scoreB) {
@@ -212,199 +215,200 @@ const App = () => {
         })]
 
 
-    console.log(get)
+
 
 
 
 
 
     return (
-        <Layout className="layout">
-            {contextHolder}
-            <Header >Header</Header>
+        <Watermark content={['Andre Fahrezi', 'Happy Working']}>
+            <Layout className="layout">
+                {contextHolder}
+                <Header >Header</Header>
 
-            <Content
-                style={{
-                    padding: '0 50px',
-                    height: 800,
-                    maxHeight: 2500,
-                    paddingTop: "30px",
-                    paddingBottom: "70%",
-                    justifyContent: "center"
-                }}
-            >
-                <Row>
-                    <Col span={8} offset={8} style={{ textAlign: "center" }}>
-                        <Title> Input klub </Title>
-                        <Card >
-                            <Form
-                                name="basic"
-                                labelCol={{
-                                    span: 8,
-                                }}
-                                wrapperCol={{
-                                    span: 16,
-                                }}
-                                style={{
-                                    maxWidth: 600,
-                                }}
-                                initialValues={{
-                                    remember: true,
-                                }}
-                                onFinish={onFinish}
-                                onFinishFailed={onFinishFailed}
-                                autoComplete="off"
-                            >
-                                <Form.Item
-                                    label="nama"
-
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your name klub!',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={onChangeKlub} />
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="klub"
-
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input kota',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={onChangeKota}
-                                    />
-                                </Form.Item>
-
-
-
-                                <Form.Item
+                <Content
+                    style={{
+                        padding: '0 50px',
+                        height: 800,
+                        maxHeight: 2500,
+                        paddingTop: "30px",
+                        paddingBottom: "70%",
+                        justifyContent: "center"
+                    }}
+                >
+                    <Row>
+                        <Col span={8} offset={8} style={{ textAlign: "center" }}>
+                            <Title> Input klub </Title>
+                            <Card >
+                                <Form
+                                    name="basic"
+                                    labelCol={{
+                                        span: 8,
+                                    }}
                                     wrapperCol={{
-                                        offset: 8,
                                         span: 16,
                                     }}
-                                >
-                                    <Button type="primary" htmlType="submit" onClick={sendklub}>
-                                        input
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </Card>
-                    </Col>
-                </Row>
-
-                <Divider />
-
-                <Row>
-                    <Col span={8} offset={8} style={{ textAlign: "center" }}>
-                        <Title> Input Score </Title>
-                        <Card >
-                            <Form
-                                name="basic"
-                                labelCol={{
-                                    span: 8,
-                                }}
-                                wrapperCol={{
-                                    span: 24,
-                                }}
-                                style={{
-                                    maxWidth: 600,
-                                }}
-                                initialValues={{
-                                    remember: true,
-                                }}
-                                onFinish={onFinish}
-                                onFinishFailed={onFinishFailed}
-                                autoComplete="off"
-                            >
-                                <Form.Item
-                                    label="klubA"
-                                    name="klubA"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your Name klubA',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={onChangeNameA} />
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="scoreA"
-                                    name="scoreA"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your Score klub A',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={onChangeScoreA} />
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="klubB"
-                                    name="klubB"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your Name klubB',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={onChangeNameB} />
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="scoreB"
-                                    name="scoreB"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your Score klub B',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        onChange={onChangeScoreB} />
-                                </Form.Item>
-
-
-                                <Form.Item
-                                    wrapperCol={{
-                                        offset: 8,
-                                        span: 16,
+                                    style={{
+                                        maxWidth: 600,
                                     }}
+                                    initialValues={{
+                                        remember: true,
+                                    }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
                                 >
-                                    <Button type="primary" htmlType="submit" onClick={sendscore}>
-                                        Submit
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </Card>
-                    </Col>
+                                    <Form.Item
+                                        label="nama"
 
-                </Row>
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input your name klub!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={onChangeKlub} />
+                                    </Form.Item>
 
-                <Divider />
+                                    <Form.Item
+                                        label="klub"
 
-                <Row>
-                    <Col span={10} offset={7} style={{ textAlign: "center" }}>
-                        <Card>
-                            {/* <Table columns={columns} dataSource={data} key="index" /> */}
-                            {/* {const data = []
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input kota',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={onChangeKota}
+                                        />
+                                    </Form.Item>
+
+
+
+                                    <Form.Item
+                                        wrapperCol={{
+                                            offset: 8,
+                                            span: 16,
+                                        }}
+                                    >
+                                        <Button type="primary" htmlType="submit" onClick={sendklub}>
+                                            input
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Divider />
+
+                    <Row>
+                        <Col span={8} offset={8} style={{ textAlign: "center" }}>
+                            <Title> Input Score </Title>
+                            <Card >
+                                <Form
+                                    name="basic"
+                                    labelCol={{
+                                        span: 8,
+                                    }}
+                                    wrapperCol={{
+                                        span: 24,
+                                    }}
+                                    style={{
+                                        maxWidth: 600,
+                                    }}
+                                    initialValues={{
+                                        remember: true,
+                                    }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                    <Form.Item
+                                        label="klubA"
+                                        name="klubA"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input your Name klubA',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={onChangeNameA} />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        label="scoreA"
+                                        name="scoreA"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input your Score klub A',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={onChangeScoreA} />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        label="klubB"
+                                        name="klubB"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input your Name klubB',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={onChangeNameB} />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        label="scoreB"
+                                        name="scoreB"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input your Score klub B',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={onChangeScoreB} />
+                                    </Form.Item>
+
+
+                                    <Form.Item
+                                        wrapperCol={{
+                                            offset: 8,
+                                            span: 16,
+                                        }}
+                                    >
+                                        <Button type="primary" htmlType="submit" onClick={sendscore}>
+                                            Submit
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+                            </Card>
+                        </Col>
+
+                    </Row>
+
+                    <Divider />
+
+                    <Row>
+                        <Col span={10} offset={7} style={{ textAlign: "center" }}>
+                            <Card>
+                                {/* <Table columns={columns} dataSource={data} key="index" /> */}
+                                {/* {const data = []
                                 get.map(menu => {
                                 data.push({
                                     key: menu.id,
@@ -414,55 +418,56 @@ const App = () => {
                                 })
                             })} */}
 
-                            {get?.map((value) => {
-                                return (
-                                    <Row key={value}>
-                                        <Col span={2}>
-                                            <Title level={5}>No</Title>
-                                            <Title level={5}>1</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>klub</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>ma</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>me</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>s</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>k</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>gm</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>gk</Title>
-                                        </Col>
-                                        <Col span={2}>
-                                            <Title level={5}>Point</Title>
-                                        </Col>
-                                    </Row>
-                                )
-                            }
-                            )}
+                                {get?.map((value) => {
+                                    return (
+                                        <Row key={value}>
+                                            <Col span={2}>
+                                                <Title level={5}>No</Title>
+                                                <Title level={5}>1</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>klub</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>ma</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>me</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>s</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>k</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>gm</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>gk</Title>
+                                            </Col>
+                                            <Col span={2}>
+                                                <Title level={5}>Point</Title>
+                                            </Col>
+                                        </Row>
+                                    )
+                                }
+                                )}
 
 
 
-                        </Card>
-                    </Col>
-                </Row>
+                            </Card>
+                        </Col>
+                    </Row>
 
 
 
-            </Content>
-            <Footer style={{ backgroundColor: "darkblue", textAlign: "center" }}>
-                <Title level={5} style={{ color: "white" }}> Footer</Title>
-            </Footer>
-        </Layout>
+                </Content>
+                <Footer style={{ backgroundColor: "darkblue", textAlign: "center" }}>
+                    <Title level={5} style={{ color: "white" }}> Footer</Title>
+                </Footer>
+            </Layout>
+        </Watermark>
     );
 };
 export default App;
